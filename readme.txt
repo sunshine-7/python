@@ -1,1 +1,1 @@
-Python is a very good language.
+Good good study,day day up!
