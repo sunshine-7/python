@@ -1,1 +1,1 @@
-Python is a strong language. 
+Python is a very good language.
