@@ -82,7 +82,7 @@ print(sorted(cal))
 index=np.argsort(cal)
 # print("权重排序后的索引为："  )
 # print(index)
-f2=open("dict.txt","w")
+f2=open("dictsort.txt","w")
 for i in index:
     f2.write(list1[i]+'\n')
 

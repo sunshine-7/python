@@ -7,6 +7,6 @@ for i in list:
     col+=i
 print(col)
 for j in col:
-    dict[j] = dict.get(j, 0) + 1#dict.get()是什么意思？？？
+    dict[j] = dict.get(j, 0) + 1
 print(dict)
 f.close()
