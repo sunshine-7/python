@@ -16,6 +16,7 @@ number=[int(line.rstrip()) for line in f if line.strip().isdigit()]
 print(number)
 #迭代器 iter， list列表是可迭代的，但不是迭代器，用iter()转换成迭代器
 # it=iter(number)
+#求和的两种方法：sum()，reduce()
 #sum(),reduce()都是内置函数，不能prinr(sum)，要写print(sum(...))
 print("10行数字求和为：",sum(number))
 print("10行数字求和为：",reduce(lambda x, y: x+y, number))
