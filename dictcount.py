@@ -3,7 +3,7 @@ col=[]
 dict = {}
 list=[line.strip() for line in f]
 for i in list:
-    i=i.split(",")#走到这一步为什么一行一行地显示？？？
+    i=i.split(",")
     col+=i
 print(col)
 for j in col:
