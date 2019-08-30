@@ -1,3 +1,4 @@
+#计算文件中每个元素的个数
 f=open("raw.txt")
 col=[]
 dict = {}
