@@ -1,4 +1,4 @@
-# 计算文件中每一行的权重
+# 计算文件中每一行元素的权重和
 f=open("kv.txt")
 list=[line.strip() for line in f]
 col=[]
