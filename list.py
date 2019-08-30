@@ -3,7 +3,7 @@
 # a.append("fafsklk")
 # print(a)
 from functools import reduce
-f=open(r"E:\PyCharmStart\1.txt","r")
+f=open(r"E:\PyCharmStart\t.txt","r")
 string=[line.strip() for line in f if line.strip()=='bbb']
 print(string)
 #seek()移动文件读取指针移动到指定位置
