@@ -3,7 +3,7 @@
 #提取bbb,并求10行数字之和
 #前面加r表示不做转义处理
 #打开文件，返回一个文件对象
-f=open(r"E:\PyCharmStart\1.txt","r")
+f=open(r"E:\PyCharmStart\t.txt","r")
 number=0
 #遍历文件
 for line in f:
