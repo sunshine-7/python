@@ -1,5 +1,6 @@
 import urllib.request
 file = urllib.request.urlopen("https://www.python.org")
+#读取网页内容
 html = file.read()
 #price.textContent.trim()用来去掉静态网页中的空白
 from lxml import etree
