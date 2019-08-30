@@ -1,3 +1,4 @@
+#对文件中每一行元素的权重和进行排序
 import numpy as np
 #打开全部都是元素的raw文件
 f1=open("raw.txt")
