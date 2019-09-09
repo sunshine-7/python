@@ -80,12 +80,12 @@ cal=0
 while i<=n:
     li.append(zh(input("请输入第%d个数:" %i)))
     i+=1
-print("总和为：%d" %sum(li))
+print("总和为：%f" %sum(li))
 #利用for循环求用户输入数字和
 for i in range(1,n+1):
     cal+=int(input("请输入第%d个数:" %i))
-    i+= 1
-print("总和为：%d" %cal)
+    i+=1
+print("总和为：%f" %cal)
 #2-15元素排序
 #不能用列表，排序算法
 print("2-15不能用列表，排序算法对3个元素进行排序")
