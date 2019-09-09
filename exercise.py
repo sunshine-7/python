@@ -1,14 +1,18 @@
 #将输入的str类型的数据转换成数值对象
-def zh(str):
-    if type(eval(str))==int:
-        str=int(str)
-    elif type(eval(str))==float:
-        str=float(str)
-    return str
+def zh(str):     #不要用str str是内置的函数
+    try:
+        if type(eval(str))==int:
+            str=int(str)
+        elif type(eval(str))==float:
+            str=float(str)
+        return str
+    except NameError as e:     #注意这里加了try except，因为如果输入不是数字就会报错
+        return "请输数字 %s 不是数字" % str
 #2-4
 print("2-4题(a)显示用户输入的字符串"
       "     (b)将用户输入的数据转换成数值对象并显示")
-def raw_input():
+
+def raw_input():       #不要和系统的函数名一样 ：< raw_input是系统函数
     #用户输入字符串，并输出
     string=input("请输入一个字符串：\n")
     print("您刚输入的字符串为：\n%s\n" %string,end="")
@@ -16,6 +20,9 @@ def raw_input():
     s = input("请输入一个数字，大小不限：\n")
     print("您刚输入的数字为：\n%s" % zh(s))
 raw_input()
+
+
+
 # 2-5(a)用while循环输出0到10
 print("2-5分别用while和for循环输出0到10")
 i=0
@@ -42,14 +49,17 @@ s=input("请输入一行字符串：\n")
 i=0
 #利用while循环逐字符遍历字符串①
 #??????????
-# ite=iter(s)
-# while True:
-#     try:
-#         each = next(ite)
-#     except StopIteration:
-#         break
-#     print(each, end=" ")
-# print("\r")
+ite=iter(s)
+while True:
+    try:
+        each = next(ite)
+    except StopIteration:
+        break
+    print(each, end=" ")
+print("\r")
+
+
+
 #利用while循环逐字符遍历字符串②
 while i<len(s):
     print(s[i],end=" ")
