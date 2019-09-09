@@ -1,28 +1,3 @@
-###############################
-##
-## 这个做的不对，应到是先计算每一行的权重
-## 然后排序的
-##
-###############################
-kvDict = {}
-with open("kv.txt", "r") as f2:
-    for i in f2:
-        i = i.strip().split(":")
-        key, value = i[0], float(i[1])
-        kvDict[key] = value
-
-lineWithWeight = []
-with open("raw.txt", "r") as f1:
-    for line in f1:
-        eles = line.strip().split(",")
-        tw = sum([kvDict.get(e, 0) for e in eles])
-        lineWithWeight.append((line, tw))
-lineWithWeight.sort(key=lambda x: x[1])
-
-with open("dictsort.txt","w") as f2:
-    outputStr = "".join(map(lambda x: x[0].strip()+":"+str(x[1])+"\n", lineWithWeight))
-    f2.write(outputStr)
-
 
 # #对文件中每一行元素的权重和进行排序
 # import numpy as np
@@ -112,7 +87,28 @@ with open("dictsort.txt","w") as f2:
 # f2=open("dictsort.txt","w")
 # for i in index:
 #     f2.write(list1[i]+'\n')
+# #简洁版
+# ###############################
+kvDict = {}
+with open("kv.txt", "r") as f2:
+    for i in f2:
+        i = i.strip().split(":")
+        key, value = i[0], float(i[1])
+        kvDict[key] = value
 
+lineWithWeight = []
+with open("raw.txt", "r") as f1:
+    for line in f1:
+        eles = line.strip().split(",")
+        tw = sum([kvDict.get(e, 0) for e in eles])
+        lineWithWeight.append((line, tw))
+#根据列表中每个元素的第二个值进行排序
+lineWithWeight.sort(key=lambda x: x[1])
+with open("dictsort.txt","w") as f2:
+    #lambda自定义函数，每一行的内容为lineWithWeight中的每个元素的两个值通过：连接
+    #" ".join是将每一行通过空格连接
+    outputStr = "".join(map(lambda x: x[0].strip()+":"+str(x[1])+"\n", lineWithWeight))
+    f2.write(outputStr)
 
 
 
