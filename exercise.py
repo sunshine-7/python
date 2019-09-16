@@ -10,6 +10,17 @@ def zh(s):
         return "error"
     else:
         return s
+#问为什么调用zh(zh("12"))会报错
+#这是因为里层 zh("12") 输出12
+#外层zh的输入变成12,   eval只能接收string
+#类型的参数，而不能接收int型的参数，抛出一个错
+#误，刚好被捕获。最好不要用Exception这个类型
+#因为它什么类型的错误都会捕获，如果一定要用，请
+#把错误信息找印出来，便出调试
+# except Exception as e:
+#      print(e)
+
+
 #2-4
 print("2-4题(a)显示用户输入的字符串"
       "     (b)将用户输入的数据转换成数值对象并显示")
@@ -104,6 +115,9 @@ while i<=n:
     li.append(zh(num))
     i+=1
 #如果依次输入-0.8  0.2  0.6 ，结果显示-0.000000？？？？？？？
+#这个问题分两部分 第一为什么不是零   是因为计算法表示小数的方法导致的 参加 https://zhidao.baidu.com/question/1610986759459381187.html
+#所以sum(float(-0.8), float(0.2), float(0.6)) 是一个非常小的负数
+#第二为什么是-0.0000  是因为用了格式化输出 %f,导致对小数做了截取。
 if sum(li) == abs(sum(li)):
     print("总和为：%f" %abs(sum(li)))
 else:
@@ -241,6 +255,30 @@ s4=input("请输入一个字符串：\n")
 print(cap_change1(s4)+"\n"+cap_change2(s4)+"\n"+cap_change3(s4))
 import time
 import datetime
+
+# 把日期转换抽象出来
+class d(object):
+    def dateTrans(self, ymd, dformat="%m/%d/%Y"):
+        try:
+            tDate = time.strptime(ymd, dformat)
+            return tDate
+        except ValueError as e:
+            print("输入格式不对 %s" %ymd)
+            return "error"
+
+    def caltime(self,date1,date2):
+        try:
+            date1=self.dateTrans(date1)
+            date2=self.dateTrans(date2)
+            date1=datetime.datetime(date1[0],date1[1],date1[2])
+            date2=datetime.datetime(date2[0],date2[1],date2[2])
+            return ((date2-date1).days)#将天数转成int型
+        except Exception:
+            print("输入格式不对")
+            return "error"
+
+time.strptime("123","%m/%d/%Y")
+
 class d:
     def caltime(self,date1,date2):
         try:
