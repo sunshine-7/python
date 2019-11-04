@@ -48,6 +48,7 @@ class SQList(object):
         print("链表长度为："+str(n))
 
     def ListEmpty(self):
+        """判断链表是否为空"""
         p=self.head
         if p is None:
             print("链表为空")
@@ -55,6 +56,7 @@ class SQList(object):
             print("链表不为空")
 
     def printspe(self):
+        """输出某个特定位置的元素"""
         p=self.head
         j=0
         i=3
@@ -67,6 +69,7 @@ class SQList(object):
             print("第三个元素为："+str(p.data))
 
     def printpos(self):
+        """输出某个特定元素的位置"""
         p=self.head
         i=1
         while(p is not None):
@@ -79,6 +82,7 @@ class SQList(object):
             print("没有找到此元素")
 
     def insertspe(self,node):
+        """在某个特定的位置插入某个元素"""
         p=self.head
         i=3
         j=0
@@ -95,6 +99,7 @@ class SQList(object):
             print("在第3个元素位置上插入元素5：")
 
     def deletespe(self):
+        """删除某个特定位置的元素"""
         i=3
         j=0
         p=self.head
@@ -120,6 +125,7 @@ class SQList(object):
             p = p.next
 
     def delete(self):
+        """释放单链表"""
         print("删除链表")
         self.head=None
         self.count=0
