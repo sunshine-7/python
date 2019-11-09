@@ -1,14 +1,15 @@
-# 函数的头字母用小写
+# 定义函数的头字母用小写
 class Node(object):
     """节点"""
     def __init__(self, data):
         self.data = data
         self.next = None
+        self.prior=None
 
 class SQList(object):
-    """单链表"""
+    """双链表"""
     def __init__(self):
-        self.head = None
+        self.head=None
         self.count = 0
 
     def headInsert(self, node):
@@ -17,9 +18,9 @@ class SQList(object):
             self.head = node
             self.count += 1
         else:
-            t = self.head
-            self.head = node
-            self.head.next = t
+            node.next=self.head
+            self.head=node
+            node.next.prior=node
             self.count += 1
 
     def append(self, node):
@@ -29,7 +30,6 @@ class SQList(object):
             self.count += 1
         else:
             p = self.head
-            # *p=L就是p指向L指向的第一个元素吗？
             # 下面这种写法虽然可以将数据插入到p指向的位置，但是这个数据和前面的链表已经断开了，并不能将数据插入到单链表中，
             # while p is not None:
             #     p = p.next
@@ -37,6 +37,7 @@ class SQList(object):
             while p.next is not None:
                 p = p.next
             p.next = node
+            node.prior=p
             self.count += 1
 
     def listLength(self):
@@ -53,7 +54,10 @@ class SQList(object):
 
     def listEmpty(self):
         """判断链表是否为空"""
+        # # 判断头结点是否有数据
         p=self.head
+        # print("""========""")
+        # print(p.data)
         if p is None:
             return True
         else:
@@ -64,6 +68,8 @@ class SQList(object):
         p=self.head
         j=0
         i=int(input("要查询哪个位置的元素？"))
+        while(i<1):
+            i = int(input("位置从1开始，请重新输入：\n"))
         while(j<i-1 and p is not None):
             p=p.next
             j+=1
@@ -86,42 +92,70 @@ class SQList(object):
         if p is None:
             print("没有找到此元素")
 
-
-    # 在第一个位置插入元素有些问题，再改改！！！！！！！！！！！！！！
     def insertSpe(self,node):
         """在某个特定的位置插入某个元素"""
         p=self.head
+        print(p.data)
         i=int(input("要在哪个位置插入元素？\n"))
+        while (i < 1):
+            i = int(input("位置从1开始，请重新输入：\n"))
         j=0
-        while(j<i-2 and p is not None):
-            p=p.next
-            j+=1
-        if p is None:
-            print("无法插入")
-        else:
-            t=p.next
-            p.next=node
-            p=p.next
-            p.next=t
+        if i==1:
+            node.next=self.head
+            # 让新插入的结点成为新的头结点
+            self.head=node
+            node.next.prior=node
             self.count+=1
-            # print("在第%d个元素位置上插入元素%d：" %i %(node.data))
+        else:
+            while(j<i-2 and p is not None):
+                p=p.next
+                j+=1
+            if p is None:
+                print("无法插入")
+            else:
+                if j==self.count-1:
+                    p.next=node
+                    node.prior=p
+                else:
+                    node.next = p.next
+                    p.next = node
+                    node.next.prior = node
+                    node.prior = p
+                self.count+=1
+        #注意，这里要这么写 %(i,int(node.data))
+        print("在第%d个元素位置上插入元素%d：" %(i,int(node.data)))
+
 
     def deleteSpe(self):
         """删除某个特定位置的元素"""
         i=int(input("要删除哪个位置的元素？\n"))
+        while (i < 1):
+            i = int(input("位置从1开始，请重新输入：\n"))
         j=0
         p=self.head
-        while(j<i-2 and p is not None):
-            j+=1
-            p=p.next
-        if p is None:
-            print("未找到，无法删除")
+        while p is None:
+            return False
+        if i==1:
+            self.head=p.next
+            if self.count != 1:
+                p.next.prior=None
+                p.next=None
         else:
-            t=p.next
-            p.next=t.next
-            print("删除第%d个元素：" %i)
-            self.count-=1
-
+            # 当跳出while循环时，p指向的是要删除的结点的前一个结点
+            while(j<i-2 and p.next is not None):
+                j+=1
+                p=p.next
+            if p.next is None:
+                print("未找到，无法删除")
+            else:
+                t=p.next
+                p.next=t.next
+                t.prior=None
+                if i!=self.count:
+                    t.next.prior=p
+                    t.next=None
+        print("删除第%d个元素：" %i)
+        self.count-=1
 
     def print(self):
         """打印链表中的所有元素"""
@@ -134,10 +168,9 @@ class SQList(object):
 
     def delete(self):
         """释放单链表"""
-        print("释放单链表")
+        print("释放双链表")
         self.head=None
         self.count=0
-
 
 
 if __name__ == '__main__':
@@ -146,8 +179,7 @@ if __name__ == '__main__':
     node = Node(n)
     n1 = int(input("请输入要插入的数据：\n"))
     node1 = Node(n1)
-    # sqlist.print()
-    sqlist.append(node)
+    sqlist.headInsert(node)
     sqlist.append(node1)
     n2 = int(input("请输入要插入的数据：\n"))
     node2 = Node(n2)
@@ -168,3 +200,4 @@ if __name__ == '__main__':
     sqlist.print()
     sqlist.delete()
     sqlist.print()
+
