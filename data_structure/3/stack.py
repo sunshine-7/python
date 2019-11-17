@@ -7,7 +7,6 @@ class Node(object):
     def __str__(self):
         return str(self.data)
 
-
 class Stack(object):
     """stack"""
     def __init__(self):
